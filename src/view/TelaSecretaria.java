@@ -7,11 +7,15 @@ package view;
 import sistema.consultório.*;
 import Arquivos.*;
 import java.io.File;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javafx.application.ConditionalFeature.FXML;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 /**
  *
  * @author MarceloAlmeidaBarros
@@ -34,38 +38,60 @@ public class TelaSecretaria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        Consultas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Cadastro = new javax.swing.JMenu();
         Cadastrar = new javax.swing.JMenuItem();
         Registrar = new javax.swing.JMenuItem();
-        Visualizar = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 453, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 357, Short.MAX_VALUE)
         );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Consultas.setText("Consultas");
+        Consultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConsultasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 659, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Consultas)
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 443, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(Consultas)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
+        jDesktopPane1.setLayer(Consultas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        Cadastro.setBackground(new java.awt.Color(255, 255, 255));
+        Cadastro.setForeground(new java.awt.Color(51, 51, 51));
         Cadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadusuario-.png"))); // NOI18N
         Cadastro.setText("Paciente");
         Cadastro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,43 +128,17 @@ public class TelaSecretaria extends javax.swing.JFrame {
 
         jMenuBar1.add(Cadastro);
 
-        Visualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/procurar.png"))); // NOI18N
-        Visualizar.setText("Visualizar");
-        Visualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                VisualizarMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                VisualizarMouseExited(evt);
-            }
-        });
-        Visualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VisualizarActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(Visualizar);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(657, 657, 657)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jDesktopPane1)
         );
 
         pack();
@@ -158,44 +158,25 @@ public class TelaSecretaria extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastroMousePressed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-        RegistrarConsulta1 regs = new RegistrarConsulta1();
+        RegistrarConsulta regs = new RegistrarConsulta();
         jDesktopPane1.add(regs);
        regs.setVisible(true);
     }//GEN-LAST:event_RegistrarActionPerformed
 
-    private void VisualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VisualizarMouseExited
-        
-    }//GEN-LAST:event_VisualizarMouseExited
-
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
        CadastroPaciente cads = new CadastroPaciente();
-       jDesktopPane1.add(cads);
+       jPanel1.add(cads);
        cads.setVisible(true);
     }//GEN-LAST:event_CadastrarActionPerformed
-
-    private void VisualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VisualizarMouseClicked
+  
+    private void ConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultasActionPerformed
         // TODO add your handling code here:
+        VisualizarConsulta view_consulta = new VisualizarConsulta();
         
+        jDesktopPane1.add(view_consulta);
         
-        Stage stage = (Stage) ((Node)evt.getSource()).getScene().getWindow();
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Consultas.txt");
-
-     File arq =  fileChooser.showOpenDialog(stage);
-    }//GEN-LAST:event_VisualizarMouseClicked
-    @FXML
-    private void VisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizarActionPerformed
-        // TODO add your handling code here:
-        
-        
-        Stage stage = (Stage) ((Node)evt.getSource()).getScene().getWindow();
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Consultas.txt");
-
-     File arq =  fileChooser.showOpenDialog(stage);
-    }//GEN-LAST:event_VisualizarActionPerformed
+        view_consulta.setVisible(true);
+    }//GEN-LAST:event_ConsultasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,11 +219,13 @@ public class TelaSecretaria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Cadastrar;
     private javax.swing.JMenu Cadastro;
+    private javax.swing.JButton Consultas;
     private javax.swing.JMenuItem Registrar;
-    private javax.swing.JMenu Visualizar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
 

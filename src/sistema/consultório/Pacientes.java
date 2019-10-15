@@ -1,44 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.consultório;
 
-/**
- *
- * @author MarceloAlmeidaBarros
- */
+
 public class Pacientes {
-    private String nome;
-     protected String dia;
-     protected String mes;
+     private String nome;
+     private String data;
+     private String ano;
      private String plano;
-     protected String CPF;
-     protected String telefone;
+     private int CPF;
+     private String telefone;
     
     
-     public Pacientes(String nome, String dia,String mes, String plano) {
+    public Pacientes(String nome, String data, String plano) 
+    {
         super();
         this.nome = nome;
-        this.dia =dia;
+        this.data =data;
         this.plano = plano;
-        this.mes = mes;
         
     }
 
-      public Pacientes(String nome, String CPF, String telefone) {
+    public Pacientes(String nome, int CPF, String telefone) 
+    {
         super();
         this.nome = nome;
         this.CPF =CPF;
         this.telefone = telefone;
-        
-        
     }
 
 
-    
+    public String getAno() {
+        return ano;
+    }
 
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -47,21 +44,14 @@ public class Pacientes {
         this.nome = nome;
     }
 
-    public String getDia() {
-        return dia;
+    public String getData() {
+        return data;
     }
 
-    public void setDia(String dia) {
-        this.dia = dia;
+    public void setData(String data) {
+        this.data = data;
     }
-     public String getMes() {
-        return mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-         public String getPlano() {
+    public String getPlano() {
         return plano;
     }
 
@@ -69,11 +59,11 @@ public class Pacientes {
         this.plano = plano;
     }
     
-      public String getCPF() {
+      public int getCPF() {
         return CPF;
     }
 
-    public void setCPF(String CPF) {
+    public void setCPF(int CPF) {
         this.CPF = CPF;
     }
       public String gettelefone() {

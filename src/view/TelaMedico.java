@@ -214,7 +214,7 @@ public class TelaMedico extends javax.swing.JFrame {
             }
             try {
                 for(Pacientes p: Suporte.recuperarConsultas()){
-                    if(p instanceof Pacientes && ((Pacientes) p).getDia().equals(jComboBox1.getSelectedItem()) &&((Pacientes) p).getMes().equals(jComboBox2.getSelectedItem()) ){
+                    if(p instanceof Pacientes && ((Pacientes) p).getData().equals(jComboBox1.getSelectedItem()) &&((Pacientes) p).getData().equals(jComboBox2.getSelectedItem()) ){
                         JOptionPane.showMessageDialog(null, " encontrado");
                         m.getList_cons().add(p);
 
@@ -229,9 +229,7 @@ public class TelaMedico extends javax.swing.JFrame {
             if(achou == 0)
             JOptionPane.showMessageDialog(null, "Nao achou");
 
-            ListaConsultas tela = new ListaConsultas();
-            tela.setVisible(true);
-            dispose();
+            
         }catch(IOException e){}
     }//GEN-LAST:event_jButton1ActionPerformed
 

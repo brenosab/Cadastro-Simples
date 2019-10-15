@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Arquivos;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import sistema.consultório.*;
-
 
 public class Suporte {
     
@@ -25,19 +17,21 @@ public class Suporte {
 		BufferedWriter ebuff = new BufferedWriter(escritor);
         
         
-        String lista = secretaria.listarPacientes();
-                ebuff.write(lista);
-                ebuff.flush();
-                ebuff.newLine();
+        ArrayList<String> lista = secretaria.listarPacientes();
+        for(int i=0;i<lista.size();i++){
+            ebuff.write(lista.get(i));
+            ebuff.flush();
+            ebuff.newLine();
+        }
+        
 
 
+        System.out.println("Nova Consulta Adicionada!!!");
 
-System.out.println("Nova Consulta Adicionada!!!");
+        //SEMPRE FECHAR OS ESCRITORES/LEITORES DE ARQUIVO
 
-//SEMPRE FECHAR OS ESCRITORES/LEITORES DE ARQUIVO
-
-ebuff.close();
-escritor.close();
+        ebuff.close();
+        escritor.close();
     }
     
     
@@ -54,57 +48,47 @@ escritor.close();
         
         
         BufferedReader breader = new BufferedReader(reader);
-        String linha = "";
-        Secretária s = new Secretária();
+        String linha;
     
-        
-        
-     
-        
         while ((linha = breader.readLine()) != null){
-           String nome = linha;
-           String plano = breader.readLine();
-           // String data = Double.parseDouble(breader.readLine());
-           String data = breader.readLine();
             
-         lista_aux.add(new Pacientes(nome,plano,data));
+            
+            String nome = linha;
+            String plano = breader.readLine();
+            // String data = Double.parseDouble(breader.readLine());
+            String data = breader.readLine();
+            lista_aux.add(new Pacientes(nome,plano,data));
         
         }
-        
-     
-    
         
         breader.close();
         reader.close();
         return lista_aux;
     
-
     }
       
+    
+    
     public static void salvaCadastroPacientes(Secretária secretaria) throws IOException{
         //NOVO ARQUIVO
-		File arquivo = new File("CadastroPacientes.txt");
-		arquivo.createNewFile();
+	File arquivo = new File("CadastroPacientes.txt");
+	arquivo.createNewFile();
 		
 		
-		//ESCRITA NO ARQUIVO
-		FileWriter escritor = new FileWriter(arquivo,true);
-		BufferedWriter ebuff = new BufferedWriter(escritor);
+	//ESCRITA NO ARQUIVO
+	FileWriter escritor = new FileWriter(arquivo,true);
+	BufferedWriter ebuff = new BufferedWriter(escritor);
         
         
         String lista = secretaria.listarCadastros();
-                ebuff.write(lista);
-                ebuff.flush();
-                ebuff.newLine();
+        ebuff.write(lista);
+        ebuff.flush();
+        ebuff.newLine();
 
-
-
-System.out.println("Novo Paciente adicionado!!!");
-
-//SEMPRE FECHAR OS ESCRITORES/LEITORES DE ARQUIVO
-
-ebuff.close();
-escritor.close();
+        System.out.println("Novo Paciente adicionado!!!");
+        //SEMPRE FECHAR OS ESCRITORES/LEITORES DE ARQUIVO
+        ebuff.close();
+        escritor.close();
     }
     
     
@@ -125,20 +109,17 @@ escritor.close();
         Secretária s = new Secretária();
     
         
-        for( Pacientes p: s.getList_pac()){
-     
-        
-        while ((linha = breader.readLine()) != null){
-           String nome = linha;
-           double CPF = Double.parseDouble(breader.readLine());
-           double telefone = Double.parseDouble(breader.readLine());
-            
-           s.listar();
-        
-        };
-        
-     
-    }
+        for( Pacientes p: s.getList_pac())
+        {
+            while ((linha = breader.readLine()) != null)
+            {
+               String nome = linha;
+               double CPF = Double.parseDouble(breader.readLine());
+               double telefone = Double.parseDouble(breader.readLine());
+
+               s.listar();
+            }
+        }
         
         breader.close();
         reader.close();
@@ -146,8 +127,5 @@ escritor.close();
     }
     
     
-   
-
-  
 }
 

@@ -6,84 +6,86 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- *
- * @author Breno de Souza
- */
+
 public class Médico extends Consultas{
+    
+    
+    public Médico() throws IOException { }
+        
     
     public void CarregarConsulta() throws IOException
     {            
-        for(Pacientes p: this.List_cons)
+        for(Pacientes p: getList_cons())
         {            
            Suporte.recuperarConsultas();
         }
-    }
-
-    public Médico() throws IOException {
     }
     
     
     public void listar()
     {
-        for(int i=0;i<this.List_cons.size();i++)
+        for(int i=0;i<getList_cons().size();i++)
         {
-            System.out.println("Nome: " + this.List_cons.get(i).getNome());
-            System.out.println("Data da Consulta: " + this.List_cons.get(i).getDia()+ "/"+ this.List_cons.get(i).getMes());
-            System.out.println("Plano: " + this.List_cons.get(i).getPlano());    
+            System.out.println("Nome: " + getList_cons().get(i).getNome());
+            System.out.println("Data da Consulta: " + getList_cons().get(i).getData());
+            System.out.println("Plano: " + getList_cons().get(i).getPlano());    
         }
     }
     
-     public String listarEmp()
-     {
+    public String listarEmp()
+    {
         String s = "";
-        for(int i=0;i<this.List_cons.size();i++)
+        for(int i=0;i<this.getList_cons().size();i++)
         {
-            s = "Nome: " + this.List_cons.get(i).getNome() + "Data da Consulta: " + this.List_cons.get(i).getDia()+ "/"+ this.List_cons.get(i).getMes() +  this.List_cons.get(i).getPlano() + "Plano: ";
+            s = "Nome: " + this.getList_cons().get(i).getNome() + "Data da Consulta: " + this.getList_cons().get(i).getData() +  this.getList_cons().get(i).getPlano() + "Plano: ";
         }
         return s;
-     }
+    }
      
-     public Pacientes buscar(String nome)
-     {
-        for(Pacientes p: this.List_cons)
+    public Pacientes buscar(String nome)
+    {
+        for(Pacientes p: this.getList_cons())
         {
             if(p.getNome().equalsIgnoreCase(nome)) return p;
 	}
         return null;
     }
      
-        public Pacientes buscarData(String dia,String mes){
-		for(Pacientes p: this.List_cons){
-			if(p.getDia().equalsIgnoreCase(dia) && p.getMes().equalsIgnoreCase(mes)){
+    public Pacientes buscarData(String data)
+    {
+		for(Pacientes p: this.getList_cons()){
+			if(p.getData().equalsIgnoreCase(data)){
 				return p;
 			}
 		}
 		return null;
-	}
-	public void remove(String nome){
-		for(Pacientes p: this.List_cons){
+    }
+
+    public void remove(String nome)
+    {
+		for(Pacientes p: this.getList_cons()){
 			if(p.getNome().equalsIgnoreCase(nome))
 			{
-				this.List_cons.remove(p);
+				this.getList_cons().remove(p);
 			}
 		}
-	}
-	public void gravar(){
+    }
+    
+    public void gravar()
+    {
 		try {			
 			File arq = new File("lista_pacintes.txt");
 			arq.createNewFile();
 			FileWriter writer = new FileWriter(arq);
 			BufferedWriter bwriter = new BufferedWriter(writer);
 			
-			for(Pacientes p: this.List_cons){
-				bwriter.write(p.getNome() + "   " + p.getDia() + "/" + p.getMes()+ "   " + p.getPlano() +"\r\n");
+			for(Pacientes p: this.getList_cons()){
+				bwriter.write(p.getNome() + "   " + p.getData()+ "   " + p.getPlano() +"\r\n");
 				bwriter.flush();
 			}
 			bwriter.close();
 			writer.close();
-		} catch (IOException Erro) {
-
-		}
-	}
+		} catch (IOException e){ }
+    }
+     
 }
